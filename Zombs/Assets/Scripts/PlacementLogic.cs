@@ -136,7 +136,23 @@ public class PlacementLogic : MonoBehaviour
 
         }
 
-        
+
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = 10;
+
+        Vector3 screenPos = Camera.main.ScreenToWorldPoint(mousePos);
+
+        RaycastHit2D hit = Physics2D.Raycast(screenPos, Vector2.zero);
+
+        if (Input.GetKey("e"))
+        {
+            if (hit)
+            {
+                Debug.Log(hit.transform.name);
+            }
+        }
+
+
     }
 
     public void TogglePlace(Tile t, Tile faded, Tile red, Tilemap tilemap, int stone, int wood, int gold)

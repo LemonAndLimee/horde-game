@@ -112,4 +112,5 @@ public class HarvestingLogic : MonoBehaviour
             canStone = false;
         }
     }
+
 }

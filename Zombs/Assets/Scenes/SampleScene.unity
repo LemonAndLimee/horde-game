@@ -336,6 +336,7 @@ GameObject:
   - component: {fileID: 371156215}
   - component: {fileID: 371156214}
   - component: {fileID: 371156216}
+  - component: {fileID: 371156217}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -407,6 +408,26 @@ MonoBehaviour:
   woodText: {fileID: 847029051}
   stoneText: {fileID: 2076326687}
   goldText: {fileID: 1336915446}
+--- !u!114 &371156217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371156213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41d50483e8e5f45c98cef6a03d5d6fd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPlacing: 0
+  wall: {fileID: 4116120041263036626, guid: f4c9b6b152318498a95266aabe987f9d, type: 3}
+  wallFaded: {fileID: 1237043835290278046, guid: 24046a73ae3734406a06fe37dd2239e9,
+    type: 3}
+  map: {fileID: 1215036913}
+  currentObject: {fileID: 0}
+  previousObject: {fileID: 0}
+  pos: {x: 0, y: 0, z: 0}
 --- !u!1 &372993646
 GameObject:
   m_ObjectHideFlags: 0

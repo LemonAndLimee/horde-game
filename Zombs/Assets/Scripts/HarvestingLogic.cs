@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HarvestingLogic : MonoBehaviour
 {
-	public PlacementLogic placementScript;
+	public PlacingLogic placementScript;
     public ScoreLogic scoreScript;
 
     public bool isHarvesting;

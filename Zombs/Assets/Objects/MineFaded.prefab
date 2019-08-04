@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 483607758603234158}
   - component: {fileID: 5668596846037120620}
   m_Layer: 0
-  m_Name: mine
+  m_Name: MineFaded
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

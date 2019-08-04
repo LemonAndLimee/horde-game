@@ -201,7 +201,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11645582}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 371156217}
+        m_MethodName: PlaceMine
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &11645582
@@ -418,6 +429,10 @@ MonoBehaviour:
   goldFaded: {fileID: 6473619713266319369, guid: 7336a41e540554d36bab7ae95c647d3a,
     type: 3}
   goldRed: {fileID: 6463200490478492542, guid: 86ce29986499b45789b154b67837f274, type: 3}
+  mine: {fileID: 3869941029260245175, guid: 5bc33f006090d41ccb15ee41ec2bcc66, type: 3}
+  mineFaded: {fileID: 301612279504597759, guid: 9a5f08971ac3a4acfa274dafd087301f,
+    type: 3}
+  mineRed: {fileID: 8590029901233064171, guid: d7b9737cecc0542eab408ca688acbaaa, type: 3}
   map: {fileID: 1215036913}
   currentObject: {fileID: 0}
   previousObject: {fileID: 0}
@@ -429,6 +444,7 @@ MonoBehaviour:
   canPlace: 0
   isBig: 0
   type: 
+  isGold: 0
   scoreScript: {fileID: 371156216}
   requiredStone: 0
   requiredWood: 0
@@ -451,6 +467,8 @@ MonoBehaviour:
   walls: 0
   goldLimit: 0
   gold: 0
+  mineLimit: 0
+  mines: 0
 --- !u!1 &372993646
 GameObject:
   m_ObjectHideFlags: 0

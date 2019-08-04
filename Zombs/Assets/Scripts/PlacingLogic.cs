@@ -14,6 +14,10 @@ public class PlacingLogic : MonoBehaviour
     public GameObject goldFaded;
     public GameObject goldRed;
 
+    public GameObject mine;
+    public GameObject mineFaded;
+    public GameObject mineRed;
+
     public GameObject map;
 
     public GameObject currentObject;
@@ -28,6 +32,7 @@ public class PlacingLogic : MonoBehaviour
     public bool canPlace;
     public bool isBig;
     public string type;
+    public bool isGold;
 
     public ScoreLogic scoreScript;
 
@@ -51,123 +56,138 @@ public class PlacingLogic : MonoBehaviour
 
         if (isPlacing == true)
         {
-            if (requiredStone <= scoreScript.stone && requiredWood <= scoreScript.wood && requiredGold <= scoreScript.gold)
+            if (isGold == true || limitScript.gold == limitScript.goldLimit)
             {
-                if (previousPos != new Vector3(Mathf.Round(Input.mousePosition.x), Mathf.Round(Input.mousePosition.y), 0f))
+                if (requiredStone <= scoreScript.stone && requiredWood <= scoreScript.wood && requiredGold <= scoreScript.gold)
                 {
-                    canPlace = true;
-
-                    currentObject = Instantiate(tileFaded, map.transform);
-
-                    currentObject.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                    pos = currentObject.transform.position;
-                    currentObject.transform.position = new Vector3(Mathf.Round(pos.x), Mathf.Round(pos.y), 0f);
-                    pos = currentObject.transform.position;
-
-
-                    if (type == "Wall")
+                    if (previousPos != new Vector3(Mathf.Round(Input.mousePosition.x), Mathf.Round(Input.mousePosition.y), 0f))
                     {
-                        if (limitScript.walls >= limitScript.wallLimit)
-                        {
-                            canPlace = false;
-                        }
-                    }
-                    else if (type == "Gold")
-                    {
-                        if (limitScript.gold >= limitScript.goldLimit)
-                        {
-                            canPlace = false;
-                        }
-                    }
+                        canPlace = true;
 
-
-
-                    if (isBig == true)
-                    {
-                        if (occupied.Contains(currentObject.transform.position) || occupied.Contains(new Vector3(currentObject.transform.position.x, currentObject.transform.position.y + 1f, currentObject.transform.position.z)) || occupied.Contains(new Vector3(currentObject.transform.position.x + 1f, currentObject.transform.position.y + 1f, currentObject.transform.position.z)) || occupied.Contains(new Vector3(currentObject.transform.position.x + 1f, currentObject.transform.position.y, currentObject.transform.position.z)))
-                        {
-                            canPlace = false;
-                        }
-
-                    }
-                    else
-                    {
-                        if (occupied.Contains(currentObject.transform.position))
-                        {
-                            canPlace = false;
-                        }
-                    }
-
-                    if (canPlace == false)
-                    {
-                        Destroy(currentObject);
-                        currentObject = Instantiate(tileRed, map.transform);
+                        currentObject = Instantiate(tileFaded, map.transform);
 
                         currentObject.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                         pos = currentObject.transform.position;
                         currentObject.transform.position = new Vector3(Mathf.Round(pos.x), Mathf.Round(pos.y), 0f);
-                    }
-
-                    Destroy(previousObject);
-                    previousObject = currentObject;
-                    previousPos = previousObject.transform.position;
-
-                }
-                if (Input.GetMouseButtonDown(0))
-                {
-
-                    if (canPlace == true)
-                    {
-                        Destroy(currentObject);
-                        currentObject = Instantiate(tile, map.transform);
-
-                        currentObject.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                         pos = currentObject.transform.position;
-                        currentObject.transform.position = new Vector3(Mathf.Round(pos.x), Mathf.Round(pos.y), 0f);
 
-                        occupied.Add(currentObject.transform.position);
-
-                        if (isBig == true)
-                        {
-                            occupied.Add(new Vector3(currentObject.transform.position.x, currentObject.transform.position.y + 1f, currentObject.transform.position.z));
-                            occupied.Add(new Vector3(currentObject.transform.position.x + 1f, currentObject.transform.position.y, currentObject.transform.position.z));
-                            occupied.Add(new Vector3(currentObject.transform.position.x + 1f, currentObject.transform.position.y + 1f, currentObject.transform.position.z));
-                        }
-
-                        currentObject = null;
-
-                        scoreScript.Add(0, -requiredWood);
-                        scoreScript.Add(1, -requiredStone);
-                        scoreScript.Add(2, -requiredGold);
 
                         if (type == "Wall")
                         {
-                            limitScript.walls += 1;
+                            if (limitScript.walls >= limitScript.wallLimit)
+                            {
+                                canPlace = false;
+                            }
                         }
                         else if (type == "Gold")
                         {
-                            limitScript.gold += 1;
+                            if (limitScript.gold >= limitScript.goldLimit)
+                            {
+                                canPlace = false;
+                            }
+                        }
+                        else if (type == "Mine")
+                        {
+                            if (limitScript.mines >= limitScript.mineLimit)
+                            {
+                                canPlace = false;
+                            }
                         }
 
-                        previousPos = new Vector3(1000f, 1000f, 0f);
-                        isPlacing = false;
-                        isPlacing = true;
+
+                        if (isBig == true)
+                        {
+                            if (occupied.Contains(currentObject.transform.position) || occupied.Contains(new Vector3(currentObject.transform.position.x, currentObject.transform.position.y + 1f, currentObject.transform.position.z)) || occupied.Contains(new Vector3(currentObject.transform.position.x + 1f, currentObject.transform.position.y + 1f, currentObject.transform.position.z)) || occupied.Contains(new Vector3(currentObject.transform.position.x + 1f, currentObject.transform.position.y, currentObject.transform.position.z)))
+                            {
+                                canPlace = false;
+                            }
+
+                        }
+                        else
+                        {
+                            if (occupied.Contains(currentObject.transform.position))
+                            {
+                                canPlace = false;
+                            }
+                        }
+
+                        if (canPlace == false)
+                        {
+                            Destroy(currentObject);
+                            currentObject = Instantiate(tileRed, map.transform);
+
+                            currentObject.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                            pos = currentObject.transform.position;
+                            currentObject.transform.position = new Vector3(Mathf.Round(pos.x), Mathf.Round(pos.y), 0f);
+                        }
+
+                        Destroy(previousObject);
+                        previousObject = currentObject;
+                        previousPos = previousObject.transform.position;
 
                     }
+                    if (Input.GetMouseButtonDown(0))
+                    {
+
+                        if (canPlace == true)
+                        {
+                            Destroy(currentObject);
+                            currentObject = Instantiate(tile, map.transform);
+
+                            currentObject.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                            pos = currentObject.transform.position;
+                            currentObject.transform.position = new Vector3(Mathf.Round(pos.x), Mathf.Round(pos.y), 0f);
+
+                            occupied.Add(currentObject.transform.position);
+
+                            if (isBig == true)
+                            {
+                                occupied.Add(new Vector3(currentObject.transform.position.x, currentObject.transform.position.y + 1f, currentObject.transform.position.z));
+                                occupied.Add(new Vector3(currentObject.transform.position.x + 1f, currentObject.transform.position.y, currentObject.transform.position.z));
+                                occupied.Add(new Vector3(currentObject.transform.position.x + 1f, currentObject.transform.position.y + 1f, currentObject.transform.position.z));
+                            }
+
+                            currentObject = null;
+
+                            scoreScript.Add(0, -requiredWood);
+                            scoreScript.Add(1, -requiredStone);
+                            scoreScript.Add(2, -requiredGold);
+
+                            if (type == "Wall")
+                            {
+                                limitScript.walls += 1;
+                            }
+                            else if (type == "Gold")
+                            {
+                                limitScript.gold += 1;
+                            }
+                            else if (type == "Mine")
+                            {
+                                limitScript.mines += 1;
+                            }
+
+                            previousPos = new Vector3(1000f, 1000f, 0f);
+                            isPlacing = false;
+                            isPlacing = true;
+
+                        }
+                    }
+                    else if (Input.GetMouseButtonDown(1))
+                    {
+                        Destroy(currentObject);
+                        previousPos = new Vector3(1000f, 1000f, 0f);
+                        isPlacing = false;
+                    }
                 }
-                else if (Input.GetMouseButtonDown(1))
+                else
                 {
                     Destroy(currentObject);
                     previousPos = new Vector3(1000f, 1000f, 0f);
                     isPlacing = false;
                 }
             }
-            else
-            {
-                Destroy(currentObject);
-                previousPos = new Vector3(1000f, 1000f, 0f);
-                isPlacing = false;
-            }
+
+            
         }
     }
 
@@ -196,14 +216,18 @@ public class PlacingLogic : MonoBehaviour
 
     public void PlaceWall()
     {
-
         TogglePlacing(wall, wallFaded, wallRed, false, 5, 0, 0, "Wall");
-
     }
 
     public void PlaceGold()
     {
         TogglePlacing(gold, goldFaded, goldRed, true, 0, 0, 0, "Gold");
+        isGold = true;
+    }
+
+    public void PlaceMine()
+    {
+        TogglePlacing(mine, mineFaded, mineRed, true, 5, 5, 0, "Mine");
     }
 
 

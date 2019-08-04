@@ -16,10 +16,15 @@ public class MineLogic : MonoBehaviour
     public float healthPercentage;
     public Slider healthBar;
 
+    public Canvas canvas;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        canvas = GetComponentInChildren<Canvas>();
+        canvas.enabled = false;
+
 		scoreScript = GameObject.Find("GameManager").GetComponent<ScoreLogic>();
         goldPerSecond = 4;
 
@@ -27,6 +32,8 @@ public class MineLogic : MonoBehaviour
 
         health = 150;
         fullHealth = 150;
+
+
     }
 
     // Update is called once per frame
@@ -44,6 +51,18 @@ public class MineLogic : MonoBehaviour
             timer = 0f;
         }
 
-        
+
+    }
+
+    public void ToggleCanvas()
+    {
+        if (canvas.enabled == false)
+        {
+            canvas.enabled = true;
+        }
+        else
+        {
+            canvas.enabled = false;
+        }
     }
 }

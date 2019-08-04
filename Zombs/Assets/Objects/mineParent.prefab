@@ -803,7 +803,7 @@ GameObject:
   - component: {fileID: 7391498795753072054}
   m_Layer: 0
   m_Name: mineParent
-  m_TagString: Untagged
+  m_TagString: Mine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -936,6 +936,7 @@ MonoBehaviour:
   fullHealth: 0
   healthPercentage: 0
   healthBar: {fileID: 0}
+  canvas: {fileID: 0}
 --- !u!1 &4009805839704620775
 GameObject:
   m_ObjectHideFlags: 0

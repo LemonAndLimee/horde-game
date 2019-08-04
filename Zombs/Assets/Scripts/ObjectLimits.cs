@@ -2,14 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FadedLogic : MonoBehaviour
+public class ObjectLimits : MonoBehaviour
 {
-    public bool isTouching;
+
+    public int wallLimit;
+    public int walls;
+
+    public int goldLimit;
+    public int gold;
 
     // Start is called before the first frame update
     void Start()
     {
-        isTouching = true;
+        wallLimit = 250;
+        goldLimit = 1;
     }
 
     // Update is called once per frame
@@ -17,6 +23,4 @@ public class FadedLogic : MonoBehaviour
     {
         
     }
-
-   
 }

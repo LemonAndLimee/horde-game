@@ -28,8 +28,8 @@ public class HarvestingLogic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        treeTime = 1f;
-        stoneTime = 1f;
+        treeTime = 0.5f;
+        stoneTime = 0.5f;
     }
 
     // Update is called once per frame
@@ -71,6 +71,14 @@ public class HarvestingLogic : MonoBehaviour
                     treeTimer = 0f;
                 }
             }
+            else
+            {
+                isHarvesting = false;
+                if (currentTree != null)
+                {
+                    treeScript.isHarvested = false;
+                }
+            }
             if (canStone == true)
             {
                 isHarvesting = true;
@@ -81,6 +89,14 @@ public class HarvestingLogic : MonoBehaviour
                 {
                     scoreScript.Add(1, 1);
                     stoneTimer = 0f;
+                }
+            }
+            else
+            {
+                isHarvesting = false;
+                if (currentStone != null)
+                {
+                    stoneScript.isHarvested = false;
                 }
             }
         }

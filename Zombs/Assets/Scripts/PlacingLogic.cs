@@ -25,9 +25,9 @@ public class PlacingLogic : MonoBehaviour
     public GameObject tile;
     public GameObject tileFaded;
     public GameObject tileRed;
-    public FadedLogic fadedScript;
     public bool canPlace;
     public bool isBig;
+    public string type;
 
     public ScoreLogic scoreScript;
 
@@ -35,12 +35,14 @@ public class PlacingLogic : MonoBehaviour
     public int requiredWood;
     public int requiredGold;
 
+    public ObjectLimits limitScript;
+
     public List<Vector3> occupied = new List<Vector3>();
 
     // Start is called before the first frame update
     void Start()
     {
-        canPlace = true;
+        
     }
 
     // Update is called once per frame
@@ -53,29 +55,38 @@ public class PlacingLogic : MonoBehaviour
             {
                 if (previousPos != new Vector3(Mathf.Round(Input.mousePosition.x), Mathf.Round(Input.mousePosition.y), 0f))
                 {
+                    canPlace = true;
+
                     currentObject = Instantiate(tileFaded, map.transform);
-                    fadedScript = currentObject.GetComponent<FadedLogic>();
 
                     currentObject.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                     pos = currentObject.transform.position;
                     currentObject.transform.position = new Vector3(Mathf.Round(pos.x), Mathf.Round(pos.y), 0f);
                     pos = currentObject.transform.position;
 
+
+                    if (type == "Wall")
+                    {
+                        if (limitScript.walls >= limitScript.wallLimit)
+                        {
+                            canPlace = false;
+                        }
+                    }
+                    else if (type == "Gold")
+                    {
+                        if (limitScript.gold >= limitScript.goldLimit)
+                        {
+                            canPlace = false;
+                        }
+                    }
+
+
+
                     if (isBig == true)
                     {
                         if (occupied.Contains(currentObject.transform.position) || occupied.Contains(new Vector3(currentObject.transform.position.x, currentObject.transform.position.y + 1f, currentObject.transform.position.z)) || occupied.Contains(new Vector3(currentObject.transform.position.x + 1f, currentObject.transform.position.y + 1f, currentObject.transform.position.z)) || occupied.Contains(new Vector3(currentObject.transform.position.x + 1f, currentObject.transform.position.y, currentObject.transform.position.z)))
                         {
                             canPlace = false;
-                            Destroy(currentObject);
-                            currentObject = Instantiate(tileRed, map.transform);
-
-                            currentObject.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                            pos = currentObject.transform.position;
-                            currentObject.transform.position = new Vector3(Mathf.Round(pos.x), Mathf.Round(pos.y), 0f);
-                        }
-                        else
-                        {
-                            canPlace = true;
                         }
 
                     }
@@ -84,17 +95,17 @@ public class PlacingLogic : MonoBehaviour
                         if (occupied.Contains(currentObject.transform.position))
                         {
                             canPlace = false;
-                            Destroy(currentObject);
-                            currentObject = Instantiate(tileRed, map.transform);
+                        }
+                    }
 
-                            currentObject.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                            pos = currentObject.transform.position;
-                            currentObject.transform.position = new Vector3(Mathf.Round(pos.x), Mathf.Round(pos.y), 0f);
-                        }
-                        else
-                        {
-                            canPlace = true;
-                        }
+                    if (canPlace == false)
+                    {
+                        Destroy(currentObject);
+                        currentObject = Instantiate(tileRed, map.transform);
+
+                        currentObject.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                        pos = currentObject.transform.position;
+                        currentObject.transform.position = new Vector3(Mathf.Round(pos.x), Mathf.Round(pos.y), 0f);
                     }
 
                     Destroy(previousObject);
@@ -129,11 +140,26 @@ public class PlacingLogic : MonoBehaviour
                         scoreScript.Add(1, -requiredStone);
                         scoreScript.Add(2, -requiredGold);
 
+                        if (type == "Wall")
+                        {
+                            limitScript.walls += 1;
+                        }
+                        else if (type == "Gold")
+                        {
+                            limitScript.gold += 1;
+                        }
+
                         previousPos = new Vector3(1000f, 1000f, 0f);
                         isPlacing = false;
                         isPlacing = true;
 
                     }
+                }
+                else if (Input.GetMouseButtonDown(1))
+                {
+                    Destroy(currentObject);
+                    previousPos = new Vector3(1000f, 1000f, 0f);
+                    isPlacing = false;
                 }
             }
             else
@@ -145,7 +171,7 @@ public class PlacingLogic : MonoBehaviour
         }
     }
 
-    public void TogglePlacing(GameObject t, GameObject faded, GameObject red, bool big, int wood, int stone, int gold)
+    public void TogglePlacing(GameObject t, GameObject faded, GameObject red, bool big, int wood, int stone, int gold, string info)
     {
         if (isPlacing == false)
         {
@@ -158,6 +184,8 @@ public class PlacingLogic : MonoBehaviour
             requiredWood = wood;
             requiredStone = stone;
             requiredGold = gold;
+
+            type = info;
         }
         else
         {
@@ -166,14 +194,16 @@ public class PlacingLogic : MonoBehaviour
         }
     }
 
-    public void PlaceWall() {
+    public void PlaceWall()
+    {
 
-        TogglePlacing(wall, wallFaded, wallRed, false, 5, 0, 0);
+        TogglePlacing(wall, wallFaded, wallRed, false, 5, 0, 0, "Wall");
 
     }
 
-    public void PlaceGold() {
-        TogglePlacing(gold, goldFaded, goldRed, true, 0, 0, 0);
+    public void PlaceGold()
+    {
+        TogglePlacing(gold, goldFaded, goldRed, true, 0, 0, 0, "Gold");
     }
 
 

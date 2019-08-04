@@ -13,9 +13,14 @@ public class ScoreLogic : MonoBehaviour
     public Text stoneText;
     public Text goldText;
 
+    public int health;
+
+    public Slider healthBar;
+
     // Start is called before the first frame update
     void Start()
     {
+        health = 100;
     }
 
     // Update is called once per frame
@@ -24,6 +29,8 @@ public class ScoreLogic : MonoBehaviour
         woodText.text = wood.ToString();
         stoneText.text = stone.ToString();
         goldText.text = gold.ToString();
+
+        healthBar.value = health;
     }
 
     public void Add(int type, int amount)

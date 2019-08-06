@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ObjectLimits : MonoBehaviour
 {
+    public int goldTier;
 
     public int wallLimit;
     public int walls;
@@ -17,6 +18,8 @@ public class ObjectLimits : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        goldTier = 1;
+
         wallLimit = 250;
         goldLimit = 1;
         mineLimit = 8;

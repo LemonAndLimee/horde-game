@@ -98,10 +98,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.8}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -220,10 +220,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.8}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -900,7 +900,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 3869941029260245175}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: de045bde765374e0ea7d2f2730aa0564, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -930,6 +930,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreScript: {fileID: 0}
+  limitScript: {fileID: 0}
   goldPerSecond: 0
   timer: 0
   health: 0
@@ -937,6 +938,17 @@ MonoBehaviour:
   healthPercentage: 0
   healthBar: {fileID: 0}
   canvas: {fileID: 0}
+  tier: 0
+  requiredWood: 0
+  requiredStone: 0
+  requiredGold: 0
+  tierText: {fileID: 1540459668257105306}
+  upgradeText: {fileID: 4915762850367911339}
+  upgradeButton: {fileID: 5496310414054533356}
+  sellingWood: 0
+  sellingStone: 0
+  sellingGold: 0
+  sellText: {fileID: 3771589404723434473}
 --- !u!1 &4009805839704620775
 GameObject:
   m_ObjectHideFlags: 0

@@ -252,10 +252,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.8}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -616,10 +616,10 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 0.8}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1114,6 +1114,7 @@ GameObject:
   - component: {fileID: 850224460204956897}
   - component: {fileID: 1381186791988433742}
   - component: {fileID: 192244011254302704}
+  - component: {fileID: 1743173343993367472}
   m_Layer: 0
   m_Name: Wall
   m_TagString: Wall
@@ -1193,7 +1194,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 4116120041263036626}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: de045bde765374e0ea7d2f2730aa0564, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -1210,6 +1211,34 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9, y: 0.9}
   m_EdgeRadius: 0
+--- !u!114 &1743173343993367472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4116120041263036626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 477f371127ce348c3a6badce6671d242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreScript: {fileID: 0}
+  limitScript: {fileID: 0}
+  health: 0
+  fullHealth: 0
+  healthPercentage: 0
+  healthBar: {fileID: 0}
+  canvas: {fileID: 0}
+  tier: 0
+  requiredStone: 0
+  requiredGold: 0
+  tierText: {fileID: 2003193128409091437}
+  upgradeText: {fileID: 5051430703312387838}
+  upgradeButton: {fileID: 3260732083439550149}
+  sellingWood: 0
+  sellingGold: 0
+  sellText: {fileID: 4548634482767050733}
 --- !u!1 &4238044787981113625
 GameObject:
   m_ObjectHideFlags: 0
